@@ -4,11 +4,6 @@ import { asciiArt } from "./image.js"
 
 const VALUE_SCALE = [".", ",", "*", "$", "x"];
 const SIZE = 10;
-<<<<<<< HEAD
-=======
-
-const dpr = devicePixelRatio;
->>>>>>> video
 
 async function loadVideo(path) {
   const vid = document.createElement("video");
