@@ -66,7 +66,7 @@ export function asciiArt(cnv, data, VALUE_SCALE, SIZE) {
   const VALUE_RANGE = ~~((min + max) / VALUE_SCALE.length);
   ctx.save();
   ctx.font = SIZE + "px monospace";
-
+  
   for (let x = 0; x < cnv.width; x += SIZE) {
     for (let y = 0; y < cnv.height; y += SIZE) {
       const [r, g, b] = getColorIndicesForCoord(~~x, ~~y, cnv.width);
