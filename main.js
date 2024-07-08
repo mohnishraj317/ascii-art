@@ -13,6 +13,6 @@ addEventListener("load", () => {
     drawImg(img);
     const { data } = ctx.getImageData(0, 0, cnv.width, cnv.height);
     ctx.clearRect(0, 0, cnv.width, cnv.height);
-    asciiArt(cnv, data, VALUE_SCALE, SIZE);
+    //asciiArt(cnv, data, VALUE_SCALE, SIZE);
   });
 });
