@@ -32,7 +32,7 @@ function drawVid(ctx, vid) {
 addEventListener("load", () => {
   resize(cnv);
 
-  loadVideo("/videos/clip2.mp4").then(vid => {
+  loadVideo("/videos/clip.mp4").then(vid => {
     document.body.append(vid);
 
     vid.style.visibility = "hidden";
