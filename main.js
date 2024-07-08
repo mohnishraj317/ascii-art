@@ -1,6 +1,7 @@
 import './style.css'
 import { cnv, ctx, resize, fillCtx } from "./utils.js"
 import { asciiArt } from "./image.js"
+import vidSrc from "/videoes/clip.mp4";
 
 const VALUE_SCALE = [".", ",", "*", "$", "x"];
 const SIZE = 10;
@@ -32,7 +33,7 @@ function drawVid(ctx, vid) {
 addEventListener("load", () => {
   resize(cnv);
 
-  loadVideo("/videos/clip.mp4").then(vid => {
+  loadVideo(vidSrc).then(vid => {
     document.body.append(vid);
 
     vid.style.visibility = "hidden";
