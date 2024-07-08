@@ -1,7 +1,7 @@
 import './style.css'
 import { cnv, ctx, resize, fillCtx } from "./utils.js"
 import { asciiArt } from "./image.js"
-import vidSrc from "/videoes/clip.mp4";
+import vidSrc from "/videos/clip.mp4";
 
 const VALUE_SCALE = [".", ",", "*", "$", "x"];
 const SIZE = 10;
