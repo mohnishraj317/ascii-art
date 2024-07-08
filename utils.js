@@ -27,8 +27,5 @@ export const getColorIndicesForCoord = (x, y, width) => {
   return [red, red + 1, red + 2, red + 3];
 };
 
-//export function brightness(r, g, b) {
-//  return (0.21 * r) + (0.72 * g) + (0.07 * b);
-//}
 export const brightness = (r, g, b) =>
   Math.sqrt(r * r * .299 + g * g * .587 + b * b * .114);

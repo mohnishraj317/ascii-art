@@ -1,4 +1,4 @@
-import { cnv, ctx, resize, brightness } from "./utils.js";
+import { cnv, ctx, resize, brightness, getColorIndicesForCoord } from "./utils.js";
 
 export async function loadImg(path) {
   const img = new Image();
@@ -15,6 +15,7 @@ export function drawImg(img) {
   const width = 400;
   const height = width / imgAspectRatio;
   resize(cnv, width, height);
+
   ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, width, height);
 }
 
@@ -57,3 +58,36 @@ export function findMinMax(data) {
   return { min, max };
 }
 
+export function asciiArt(cnv, data, VALUE_SCALE, SIZE) {
+  const ctx = cnv.getContext("2d");
+  const { min, max } = findMinMax(data);
+  const dpr = devicePixelRatio;
+
+  const VALUE_RANGE = ~~((min + max) / VALUE_SCALE.length);
+  ctx.save();
+  ctx.font = SIZE + "px monospace";
+
+  for (let x = 0; x < cnv.width; x += SIZE * dpr / 1.4) {
+    for (let y = 0; y < cnv.height; y += SIZE * dpr / 1.4) {
+      const [r, g, b] = getColorIndicesForCoord(~~x, ~~y, cnv.width);
+
+      const red = data[r];
+      const green = data[g];
+      const blue = data[b];
+
+      const bright = brightness(red, green, blue);
+      let val;
+
+      for (let i = 1; i <= VALUE_SCALE.length; i++) {
+        if (bright < i * VALUE_RANGE) {
+          val = i * VALUE_RANGE;
+          ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+          ctx.fillText(VALUE_SCALE[i - 1], x / dpr, y / dpr);
+          break;
+        }
+      }
+    }
+  }
+
+  ctx.restore();
+}
