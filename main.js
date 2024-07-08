@@ -1,9 +1,11 @@
 import './style.css'
-import { cnv, ctx, resize } from "./utils.js"
+import { cnv, ctx, resize, fillCtx } from "./utils.js"
 import { asciiArt } from "./image.js"
 
 const VALUE_SCALE = [".", ",", "*", "$", "x"];
 const SIZE = 10;
+
+const dpr = devicePixelRatio;
 
 async function loadVideo(path) {
   const vid = document.createElement("video");
@@ -20,13 +22,13 @@ async function loadVideo(path) {
 
 function drawVid(ctx, vid) {
   const aspectRatio = vid.videoWidth / vid.videoHeight;
-  const width = 800;
+  const width = innerWidth - 20;
   const height = width / aspectRatio;
 
   resize(cnv, width, height);
 
   ctx.drawImage(vid, 0, 0, vid.videoWidth, vid.videoHeight,
-    0, 0, cnv.width, cnv.height);
+    0, 0, width, height);
 }
 
 addEventListener("load", () => {
@@ -36,6 +38,8 @@ addEventListener("load", () => {
     document.body.append(vid);
 
     vid.style.visibility = "hidden";
+    vid.style.height = "1px";
+    vid.style.width = "1px";
 
     vid.addEventListener("play", function animate() {
       requestAnimationFrame(animate);
