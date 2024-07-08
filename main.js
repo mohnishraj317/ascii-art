@@ -2,9 +2,8 @@ import './style.css'
 import { cnv, ctx, resize, fillCtx } from "./utils.js"
 import { drawImg, loadImg, asciiArt } from "./image.js"
 
-const VALUE_SCALE = [" ", ".", "*", "$", "#"];
+const VALUE_SCALE = [".", ",", "*", "$", "x"];
 const SIZE = 10;
-const dpr = devicePixelRatio;
 
 addEventListener("load", () => {
   resize(cnv);
