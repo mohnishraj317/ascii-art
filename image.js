@@ -67,8 +67,8 @@ export function asciiArt(cnv, data, VALUE_SCALE, SIZE) {
   ctx.save();
   ctx.font = SIZE + "px monospace";
 
-  for (let x = 0; x < cnv.width; x += SIZE * dpr / 1.4) {
-    for (let y = 0; y < cnv.height; y += SIZE * dpr / 1.4) {
+  for (let x = 0; x < cnv.width; x += SIZE) {
+    for (let y = 0; y < cnv.height; y += SIZE) {
       const [r, g, b] = getColorIndicesForCoord(~~x, ~~y, cnv.width);
 
       const red = data[r];
@@ -76,13 +76,11 @@ export function asciiArt(cnv, data, VALUE_SCALE, SIZE) {
       const blue = data[b];
 
       const bright = brightness(red, green, blue);
-      let val;
 
       for (let i = 1; i <= VALUE_SCALE.length; i++) {
         if (bright < i * VALUE_RANGE) {
-          val = i * VALUE_RANGE;
           ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
-          ctx.fillText(VALUE_SCALE[i - 1], x / dpr, y / dpr);
+          ctx.fillText(VALUE_SCALE[VALUE_SCALE.length - i], x / dpr, y / dpr);
           break;
         }
       }
