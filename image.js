@@ -67,13 +67,8 @@ export function asciiArt(cnv, data, VALUE_SCALE, SIZE) {
   ctx.save();
   ctx.font = SIZE + "px monospace";
 
-<<<<<<< HEAD
   for (let x = 0; x < cnv.width; x += SIZE * dpr) {
     for (let y = 0; y < cnv.height; y += SIZE * dpr) {
-=======
-  for (let x = 0; x < cnv.width; x += SIZE) {
-    for (let y = 0; y < cnv.height; y += SIZE) {
->>>>>>> video
       const [r, g, b] = getColorIndicesForCoord(~~x, ~~y, cnv.width);
 
       const red = data[r];
