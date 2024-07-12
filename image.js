@@ -62,13 +62,16 @@ export function asciiArt(cnv, data, VALUE_SCALE, SIZE) {
   const ctx = cnv.getContext("2d");
   const { min, max } = findMinMax(data);
   const dpr = devicePixelRatio;
+  let scaleFactor = (function(x) {
+    return 1 - 1 / Math.sqrt(x / 1000 + 100);
+  }(cnv.width));
 
   const VALUE_RANGE = ~~((min + max) / VALUE_SCALE.length);
   ctx.save();
   ctx.font = SIZE + "px monospace";
 
-  for (let x = 0; x < cnv.width; x += SIZE * dpr) {
-    for (let y = 0; y < cnv.height; y += SIZE * dpr) {
+  for (let x = 0; x < cnv.width; x += SIZE * dpr * scaleFactor) {
+    for (let y = 0; y < cnv.height; y += SIZE * dpr * scaleFactor) {
       const [r, g, b] = getColorIndicesForCoord(~~x, ~~y, cnv.width);
 
       const red = data[r];
