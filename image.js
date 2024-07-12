@@ -1,4 +1,4 @@
-import { cnv, ctx, resize, brightness, getColorIndicesForCoord } from "./utils.js";
+import { resize, brightness, getColorIndicesForCoord } from "./utils.js";
 
 export async function loadImg(path) {
   const img = new Image();

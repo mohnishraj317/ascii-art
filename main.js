@@ -1,34 +1,14 @@
 import './style.css'
 import { cnv, ctx, resize, fillCtx } from "./utils.js"
 import { asciiArt } from "./image.js"
-import vidSrc from "/videos/clip.mp4";
+import { loadVideo, drawVid } from "./video.js";
+//import vidSrc from "/videos/clip.mp4";
+import vidSrc from "/videos/rickroll.mp4"
 
 const VALUE_SCALE = [".", ",", "*", "$", "x"];
 const SIZE = 10;
 
-async function loadVideo(path) {
-  const vid = document.createElement("video");
-  vid.src = path;
-  vid.autoplay = true;
-  vid.muted = true;
-  vid.loop = true;
-
-  return new Promise((res, rej) => {
-    vid.addEventListener("loadeddata", () => res(vid));
-    vid.addEventListener("error", () => rej());
-  })
-}
-
-function drawVid(ctx, vid) {
-  const aspectRatio = vid.videoWidth / vid.videoHeight;
-  const width = innerWidth - 20;
-  const height = width / aspectRatio;
-
-  resize(cnv, width, height);
-
-  ctx.drawImage(vid, 0, 0, vid.videoWidth, vid.videoHeight,
-    0, 0, width, height);
-}
+cnv.willReadFrequently = true;
 
 addEventListener("load", () => {
   resize(cnv);
